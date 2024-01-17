@@ -1,6 +1,8 @@
 const grigliaHtml = document.getElementById('griglia')
 let startinput = document.getElementById( 'start')
 let arrayBombe = []
+let celleTotali = 84
+let celleCliccate = 0
 
 do {
 
@@ -13,6 +15,8 @@ do {
 
 
 } while (arrayBombe.length !== 16)
+
+console.log(arrayBombe);
 
 startinput.addEventListener('click', function(){
     document.getElementById("tabella").style.display = "block";
@@ -29,11 +33,21 @@ for (let i = 1; i <= 100; i++) {
     box.addEventListener('click', function () {
         if(arrayBombe.includes(i)){
             box.classList.add('rosso')
-            console.log("e presente")
-        } else{
+            setTimeout(function(){
+              alert("hai perso :(")
+              window.location.reload();  
+            }, 100);
+        }else{
             box.classList.add('verde')
-            console.log("non e presente")
+            celleCliccate++
         }       
+        
+        if(celleCliccate == celleTotali){          
+            setTimeout(function(){
+                alert("hai vinto")
+                window.location.reload();  
+            }, 100);
+        }  
     })
 
     grigliaHtml.append(box)
@@ -43,3 +57,4 @@ for (let i = 1; i <= 100; i++) {
 function randomica(max) {
     return Math.floor(Math.random() * max) + 1
 }
+
